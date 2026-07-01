@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# operate-system pre-commit — makes a Zone-1 leak structurally hard, not just discouraged.
+# Install once:  git config core.hooksPath .githooks
+set -e
+echo "[pre-commit] Zone-1 leak scan..."
+
+# 1) No secret-like files may be committed.
+if git diff --cached --name-only | grep -Eiq '(^|/)(\.env$|.*\.(key|pem)$|.*credential.*|.*secret.*)'; then
+  echo "ERROR: a secret-like file is staged — unstage it (secrets never ship in Zone-1)." >&2
+  exit 1
+fi
+
+# 2) No operator/tenant identity tokens in staged content.
+#    Config-driven: .zone-tokens is gitignored, so the forbidden-token LIST never ships —
+#    the mechanism is public, the identities are not. (This is the fix for "the linter
+#    that forbids identity can't itself be naively public.")
+if [ -f .zone-tokens ]; then
+  if git diff --cached -U0 | grep -E '^\+' | grep -iEf .zone-tokens; then
+    echo "ERROR: an identity/tenant token appears in staged content — Zone-1 must stay operator-agnostic." >&2
+    exit 1
+  fi
+fi
+
+echo "[pre-commit] clean — no secrets, no identity leaks."

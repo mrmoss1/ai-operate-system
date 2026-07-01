@@ -1,0 +1,10 @@
+# operate-system (Zone-1, public). No client/tenant/operator data ever.
+__pycache__/
+*.pyc
+.DS_Store
+.env
+*.key
+*.pem
+# The local, gitignored identity-token list the pre-commit guard reads.
+# Config lives here so the forbidden tokens themselves never ship.
+.zone-tokens

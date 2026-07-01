@@ -1,0 +1,31 @@
+name: operate-system-ci
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Engine self-tests
+        working-directory: engines
+        run: |
+          python3 atomic_write.py --self-test
+          python3 agent_form_migrate.py --self-test
+          python3 board_ids.py
+          python3 board_add.py
+      - name: Import check (every engine loads clean)
+        working-directory: engines
+        run: |
+          for f in *.py; do python3 -c "import ${f%.py}"; done
+      - name: Zone-1 leak guard (no secrets tracked)
+        run: |
+          if git ls-files | grep -Ei '(\.env$|\.key$|\.pem$|credential|secret)'; then
+            echo "secret-like file tracked"; exit 1
+          fi
+          echo "no secrets tracked"
