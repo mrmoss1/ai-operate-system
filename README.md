@@ -1,6 +1,6 @@
 # operate-system
 
-![CI](https://github.com/OWNER/operate-system/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/mrmoss1/operate-system/actions/workflows/ci.yml/badge.svg)
 ![Zone-1](https://img.shields.io/badge/Zone--1-operator--agnostic-2ea44f)
 ![Python](https://img.shields.io/badge/python-3.11-blue)
 
@@ -66,5 +66,5 @@ python3 agent_form_migrate.py --self-test
 
 ---
 
-*This repository is the shareable core of a larger, privately-governed system. Replace `OWNER` in
-the CI badge with the repository owner once published.*
+*This repository is the shareable core of a larger, privately-governed system — the private
+per-practice installs (Zone 2) never ship here.*
