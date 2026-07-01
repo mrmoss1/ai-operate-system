@@ -1,6 +1,6 @@
 # operate-system
 
-![CI](https://github.com/mrmoss1/operate-system/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/mrmoss1/ai-operate-system/actions/workflows/ci.yml/badge.svg)
 ![Zone-1](https://img.shields.io/badge/Zone--1-operator--agnostic-2ea44f)
 ![Python](https://img.shields.io/badge/python-3.11-blue)
 
