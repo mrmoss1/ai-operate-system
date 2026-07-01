@@ -64,7 +64,7 @@ def _emb(obj):
 
 
 def _utcnow():
-    return datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _resolve_epic(portfolio, epic_id):
