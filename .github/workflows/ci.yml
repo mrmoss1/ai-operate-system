@@ -1,4 +1,4 @@
-name: operate-system-ci
+name: ai-operate-system-ci
 on:
   push:
     branches: [ main ]
